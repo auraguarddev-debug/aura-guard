@@ -1,0 +1,2229 @@
+{
+  "type": "aura_guard_live_test",
+  "version": "0.3.1",
+  "timestamp": "2026-02-09T08:31:18.001734+00:00",
+  "model": "claude-sonnet-4-20250514",
+  "mode": "ab",
+  "runs_per_scenario": 5,
+  "scenarios": {
+    "A: Jitter Loop (reformulation trap)": {
+      "guard": {
+        "runs": 5,
+        "runs_ok": 5,
+        "runs_failed": 0,
+        "stats": {
+          "turns": {
+            "p50": 5.0,
+            "p90": 5.0,
+            "values": [
+              5,
+              5,
+              5,
+              5,
+              5
+            ]
+          },
+          "cost_usd": {
+            "p50": 0.1446,
+            "p90": 0.145,
+            "values": [
+              0.1449,
+              0.1451,
+              0.1446,
+              0.1445,
+              0.1444
+            ]
+          },
+          "total_tokens": {
+            "p50": 6088.0,
+            "p90": 6099.2,
+            "values": [
+              6088,
+              6089,
+              6060,
+              6106,
+              6050
+            ]
+          },
+          "interventions": {
+            "total": 5,
+            "values": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "quality": {
+            "mean": null,
+            "values": []
+          }
+        },
+        "per_run": [
+          {
+            "turns": 5,
+            "elapsed_s": 15.0,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 1,
+            "input_tokens": 5534,
+            "output_tokens": 554,
+            "token_cost_usd": 0.0249,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1449,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 1,
+            "quality": {
+              "score": null,
+              "total": 0,
+              "matched": [],
+              "missed": []
+            },
+            "final_response": "I apologize, but I was unable to find the specific details you requested in our knowledge base. The search results only provided general references to EU consumer protections and cooling-off periods, but did not contain the exact number of days, whether they are calendar or business days, or specifi",
+            "guard_actions": {
+              "max_calls_per_tool": 1
+            }
+          },
+          {
+            "turns": 5,
+            "elapsed_s": 14.73,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 1,
+            "input_tokens": 5523,
+            "output_tokens": 566,
+            "token_cost_usd": 0.0251,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1451,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 1,
+            "quality": {
+              "score": null,
+              "total": 0,
+              "matched": [],
+              "missed": []
+            },
+            "final_response": "I apologize, but I wasn't able to find the specific details you requested in our knowledge base. The search results only provided general references to EU consumer protections and cooling-off periods without the exact number of days, whether they're calendar or business days, or specific information",
+            "guard_actions": {
+              "max_calls_per_tool": 1
+            }
+          },
+          {
+            "turns": 5,
+            "elapsed_s": 14.74,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 1,
+            "input_tokens": 5526,
+            "output_tokens": 534,
+            "token_cost_usd": 0.0246,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1446,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 1,
+            "quality": {
+              "score": null,
+              "total": 0,
+              "matched": [],
+              "missed": []
+            },
+            "final_response": "I apologize, but I was unable to find the specific details you requested about the EU cooling-off period for digital products in our knowledge base. The search results only provided general references to EU consumer protections and cooling-off periods without the exact number of days, whether they'r",
+            "guard_actions": {
+              "max_calls_per_tool": 1
+            }
+          },
+          {
+            "turns": 5,
+            "elapsed_s": 15.72,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 1,
+            "input_tokens": 5590,
+            "output_tokens": 516,
+            "token_cost_usd": 0.0245,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1445,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 1,
+            "quality": {
+              "score": null,
+              "total": 0,
+              "matched": [],
+              "missed": []
+            },
+            "final_response": "I apologize, but I was unable to find the specific details you requested in our knowledge base. The search results only provided general references to EU consumer protections and cooling-off periods without the exact number of days, whether they're calendar or business days, or specific information ",
+            "guard_actions": {
+              "max_calls_per_tool": 1
+            }
+          },
+          {
+            "turns": 5,
+            "elapsed_s": 14.23,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 1,
+            "input_tokens": 5529,
+            "output_tokens": 521,
+            "token_cost_usd": 0.0244,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1444,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 1,
+            "quality": {
+              "score": null,
+              "total": 0,
+              "matched": [],
+              "missed": []
+            },
+            "final_response": "I apologize, but I was unable to find the specific details you requested about the EU cooling-off period for digital products in our knowledge base. The search results only provided general references to EU consumer protections and cooling-off periods without the exact number of days, whether they'r",
+            "guard_actions": {
+              "max_calls_per_tool": 1
+            }
+          }
+        ]
+      },
+      "no_guard": {
+        "runs": 5,
+        "runs_ok": 5,
+        "runs_failed": 0,
+        "stats": {
+          "turns": {
+            "p50": 7.0,
+            "p90": 7.0,
+            "values": [
+              7,
+              7,
+              7,
+              7,
+              7
+            ]
+          },
+          "cost_usd": {
+            "p50": 0.2778,
+            "p90": 0.2782,
+            "values": [
+              0.2778,
+              0.2775,
+              0.2783,
+              0.2775,
+              0.278
+            ]
+          },
+          "total_tokens": {
+            "p50": 9874.0,
+            "p90": 9969.2,
+            "values": [
+              9874,
+              9847,
+              9988,
+              9852,
+              9941
+            ]
+          },
+          "interventions": {
+            "total": 0,
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "quality": {
+            "mean": null,
+            "values": []
+          }
+        },
+        "per_run": [
+          {
+            "turns": 7,
+            "elapsed_s": 18.5,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 6,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 9193,
+            "output_tokens": 681,
+            "token_cost_usd": 0.0378,
+            "tool_cost_usd": 0.24,
+            "total_cost_usd": 0.2778,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": null,
+              "total": 0,
+              "matched": [],
+              "missed": []
+            },
+            "final_response": "I apologize, but after searching through multiple approaches in our knowledge base, I'm unable to find the specific details you're looking for regarding the exact cooling-off period for EU digital product purchases. The search results only provide general references to EU consumer protections and co",
+            "guard_actions": {}
+          },
+          {
+            "turns": 7,
+            "elapsed_s": 19.6,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 6,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 9187,
+            "output_tokens": 660,
+            "token_cost_usd": 0.0375,
+            "tool_cost_usd": 0.24,
+            "total_cost_usd": 0.2775,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": null,
+              "total": 0,
+              "matched": [],
+              "missed": []
+            },
+            "final_response": "I apologize, but after searching through multiple approaches in our knowledge base, I'm unable to find the specific details you're looking for regarding the exact EU cooling-off period for digital products. The search results only provide general references to EU consumer protections and directives ",
+            "guard_actions": {}
+          },
+          {
+            "turns": 7,
+            "elapsed_s": 18.68,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 6,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 9297,
+            "output_tokens": 691,
+            "token_cost_usd": 0.0383,
+            "tool_cost_usd": 0.24,
+            "total_cost_usd": 0.2783,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": null,
+              "total": 0,
+              "matched": [],
+              "missed": []
+            },
+            "final_response": "I apologize, but after searching through multiple approaches in our knowledge base, I'm unable to find the specific details you're looking for regarding the exact cooling-off period for EU digital product purchases. The search results only provide general references to EU consumer protections and va",
+            "guard_actions": {}
+          },
+          {
+            "turns": 7,
+            "elapsed_s": 18.23,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 6,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 9187,
+            "output_tokens": 665,
+            "token_cost_usd": 0.0375,
+            "tool_cost_usd": 0.24,
+            "total_cost_usd": 0.2775,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": null,
+              "total": 0,
+              "matched": [],
+              "missed": []
+            },
+            "final_response": "I apologize, but after searching through multiple approaches in our knowledge base, I'm unable to find the specific details you're looking for regarding the exact EU cooling-off period for digital products. The search results only provide general references to EU consumer protections and directives ",
+            "guard_actions": {}
+          },
+          {
+            "turns": 7,
+            "elapsed_s": 19.12,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 6,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 9260,
+            "output_tokens": 681,
+            "token_cost_usd": 0.038,
+            "tool_cost_usd": 0.24,
+            "total_cost_usd": 0.278,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": null,
+              "total": 0,
+              "matched": [],
+              "missed": []
+            },
+            "final_response": "I apologize, but after searching through our knowledge base with multiple different approaches, I'm unable to find the specific details you're looking for regarding:\n\n- The exact number of days for the EU cooling-off period for digital products\n- Whether it's calendar days or business days\n- Whether",
+            "guard_actions": {}
+          }
+        ]
+      }
+    },
+    "B: Double Refund (ambiguous response trap)": {
+      "guard": {
+        "runs": 5,
+        "runs_ok": 5,
+        "runs_failed": 0,
+        "stats": {
+          "turns": {
+            "p50": 5.0,
+            "p90": 5.0,
+            "values": [
+              5,
+              5,
+              4,
+              4,
+              5
+            ]
+          },
+          "cost_usd": {
+            "p50": 0.1456,
+            "p90": 0.146,
+            "values": [
+              0.1461,
+              0.1456,
+              0.1,
+              0.1002,
+              0.1458
+            ]
+          },
+          "total_tokens": {
+            "p50": 5955.0,
+            "p90": 5980.4,
+            "values": [
+              5988,
+              5955,
+              4453,
+              4439,
+              5969
+            ]
+          },
+          "interventions": {
+            "total": 5,
+            "values": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "quality": {
+            "mean": 1.0,
+            "values": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        },
+        "per_run": [
+          {
+            "turns": 5,
+            "elapsed_s": 17.88,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 1,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 0,
+            "input_tokens": 5309,
+            "output_tokens": 679,
+            "token_cost_usd": 0.0261,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1461,
+            "quarantined_tools": {},
+            "interventions": 1,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "refund",
+                "79.99",
+                "ORD-123"
+              ],
+              "missed": []
+            },
+            "final_response": "I understand your frustration with the previous experience. I've submitted your refund request for $79.99 for the defective headphones, but the system is showing it as \"pending\" which matches your concern about refunds getting stuck in processing.\n\nHere's what I've done and what you should expect:\n-",
+            "guard_actions": {
+              "idempotent_replay": 1
+            }
+          },
+          {
+            "turns": 5,
+            "elapsed_s": 15.99,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 1,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 0,
+            "input_tokens": 5307,
+            "output_tokens": 648,
+            "token_cost_usd": 0.0256,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1456,
+            "quarantined_tools": {},
+            "interventions": 1,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "refund",
+                "79.99",
+                "ORD-123"
+              ],
+              "missed": []
+            },
+            "final_response": "I understand your concern about the refund being stuck in \"pending\" status. I've submitted your refund request for $79.99 for the defective headphones, but the system is showing it as pending rather than confirmed.\n\nGiven your previous experience with refunds getting stuck, I want to make sure this ",
+            "guard_actions": {
+              "idempotent_replay": 1
+            }
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 12.93,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 2,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 1,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 0,
+            "input_tokens": 3899,
+            "output_tokens": 554,
+            "token_cost_usd": 0.02,
+            "tool_cost_usd": 0.08,
+            "total_cost_usd": 0.1,
+            "quarantined_tools": {},
+            "interventions": 1,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "refund",
+                "79.99",
+                "ORD-123"
+              ],
+              "missed": []
+            },
+            "final_response": "I understand your concern about the \"pending\" status given your previous experience. I've submitted your refund request twice to ensure it's properly processed. Your full refund of $79.99 for the defective wireless headphones from order ORD-123 has been submitted.\n\nThe system is showing \"pending\" st",
+            "guard_actions": {
+              "idempotent_replay": 1
+            }
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 15.04,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 2,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 1,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 0,
+            "input_tokens": 3868,
+            "output_tokens": 571,
+            "token_cost_usd": 0.0202,
+            "tool_cost_usd": 0.08,
+            "total_cost_usd": 0.1002,
+            "quarantined_tools": {},
+            "interventions": 1,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "refund",
+                "79.99",
+                "ORD-123"
+              ],
+              "missed": []
+            },
+            "final_response": "I understand your concern about the \"pending\" status given your previous experience. I've submitted your refund request for the full $79.99 twice to ensure it's properly queued in our system. \n\nHere's what I've done:\n- \u2705 Verified your order ORD-123 for Wireless Headphones ($79.99)\n- \u2705 Processed full",
+            "guard_actions": {
+              "idempotent_replay": 1
+            }
+          },
+          {
+            "turns": 5,
+            "elapsed_s": 16.87,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 1,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 0,
+            "input_tokens": 5308,
+            "output_tokens": 661,
+            "token_cost_usd": 0.0258,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1458,
+            "quarantined_tools": {},
+            "interventions": 1,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "refund",
+                "79.99",
+                "ORD-123"
+              ],
+              "missed": []
+            },
+            "final_response": "I understand your concern about the refund getting stuck in \"pending\" status like before. I've submitted your refund request for the full $79.99 for the defective wireless headphones from order ORD-123. \n\nThe system is currently showing the refund as \"pending,\" but I want to make sure this doesn't g",
+            "guard_actions": {
+              "idempotent_replay": 1
+            }
+          }
+        ]
+      },
+      "no_guard": {
+        "runs": 5,
+        "runs_ok": 5,
+        "runs_failed": 0,
+        "stats": {
+          "turns": {
+            "p50": 4.0,
+            "p90": 4.0,
+            "values": [
+              4,
+              4,
+              4,
+              4,
+              4
+            ]
+          },
+          "cost_usd": {
+            "p50": 0.1397,
+            "p90": 0.1398,
+            "values": [
+              0.1393,
+              0.1393,
+              0.1397,
+              0.1397,
+              0.1398
+            ]
+          },
+          "total_tokens": {
+            "p50": 4395.0,
+            "p90": 4404.2,
+            "values": [
+              4372,
+              4393,
+              4395,
+              4397,
+              4409
+            ]
+          },
+          "interventions": {
+            "total": 0,
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "quality": {
+            "mean": 1.0,
+            "values": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        },
+        "per_run": [
+          {
+            "turns": 4,
+            "elapsed_s": 11.14,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 3855,
+            "output_tokens": 517,
+            "token_cost_usd": 0.0193,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1393,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "refund",
+                "79.99",
+                "ORD-123"
+              ],
+              "missed": []
+            },
+            "final_response": "Perfect! Your refund has now been successfully processed with status \"completed\". Here are the details:\n\n- **Order ID**: ORD-123\n- **Refund Amount**: $79.99 (full refund)\n- **Refund ID**: REF-123\n- **Status**: Completed\n- **Reason**: Defective headphones\n\nThe refund should appear in your original pa",
+            "guard_actions": {}
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 11.38,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 3882,
+            "output_tokens": 511,
+            "token_cost_usd": 0.0193,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1393,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "refund",
+                "79.99",
+                "ORD-123"
+              ],
+              "missed": []
+            },
+            "final_response": "Perfect! Your refund has now been successfully processed. Here are the details:\n\n- **Order ID**: ORD-123\n- **Refund Amount**: $79.99 (full refund)\n- **Refund ID**: REF-123\n- **Status**: Completed \u2705\n- **Reason**: Defective headphones\n\nThe refund is now complete and should appear in your account withi",
+            "guard_actions": {}
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 12.77,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 3854,
+            "output_tokens": 541,
+            "token_cost_usd": 0.0197,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1397,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "refund",
+                "79.99",
+                "ORD-123"
+              ],
+              "missed": []
+            },
+            "final_response": "Perfect! Your refund has now been successfully processed. Here are the details:\n\n- **Order ID**: ORD-123\n- **Refund Amount**: $79.99 (full refund)\n- **Refund ID**: REF-123\n- **Status**: Completed\n- **Reason**: Defective headphones\n\nThe refund is confirmed as completed, not just pending. You should s",
+            "guard_actions": {}
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 12.22,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 3851,
+            "output_tokens": 546,
+            "token_cost_usd": 0.0197,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1397,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "refund",
+                "79.99",
+                "ORD-123"
+              ],
+              "missed": []
+            },
+            "final_response": "Perfect! Your refund has now been successfully processed. Here are the details:\n\n- **Order ID**: ORD-123\n- **Refund Amount**: $79.99 (full refund)\n- **Refund ID**: REF-123\n- **Status**: Completed\n- **Reason**: Defective headphones\n\nThe refund has been confirmed as completed, so you should see the $7",
+            "guard_actions": {}
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 12.5,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 3861,
+            "output_tokens": 548,
+            "token_cost_usd": 0.0198,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1398,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "refund",
+                "79.99",
+                "ORD-123"
+              ],
+              "missed": []
+            },
+            "final_response": "Perfect! Your refund has now been successfully processed. Here are the details:\n\n- **Order ID**: ORD-123\n- **Refund Amount**: $79.99 (full refund)\n- **Refund ID**: REF-123\n- **Status**: Completed\n- **Reason**: Defective headphones\n\nThe refund is confirmed as completed, not just pending. You should s",
+            "guard_actions": {}
+          }
+        ]
+      }
+    },
+    "C: Error Retry Spiral": {
+      "guard": {
+        "runs": 5,
+        "runs_ok": 5,
+        "runs_failed": 0,
+        "stats": {
+          "turns": {
+            "p50": 4.0,
+            "p90": 4.0,
+            "values": [
+              4,
+              4,
+              4,
+              4,
+              4
+            ]
+          },
+          "cost_usd": {
+            "p50": 0.0953,
+            "p90": 0.0954,
+            "values": [
+              0.0948,
+              0.095,
+              0.0953,
+              0.0953,
+              0.0954
+            ]
+          },
+          "total_tokens": {
+            "p50": 3237.0,
+            "p90": 3245.4,
+            "values": [
+              3202,
+              3217,
+              3237,
+              3247,
+              3243
+            ]
+          },
+          "interventions": {
+            "total": 5,
+            "values": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "quality": {
+            "mean": 0.8,
+            "values": [
+              1.0,
+              0.67,
+              0.67,
+              0.67,
+              1.0
+            ]
+          }
+        },
+        "per_run": [
+          {
+            "turns": 4,
+            "elapsed_s": 12.81,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 2,
+            "tool_calls_failed": 2,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 1,
+            "input_tokens": 2770,
+            "output_tokens": 432,
+            "token_cost_usd": 0.0148,
+            "tool_cost_usd": 0.08,
+            "total_cost_usd": 0.0948,
+            "quarantined_tools": {
+              "get_order_failing": "error_retry:429"
+            },
+            "interventions": 1,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "unavailable",
+                "technical",
+                "apolog"
+              ],
+              "missed": []
+            },
+            "final_response": "I understand this is urgent and I apologize that the order lookup system is currently unavailable due to technical issues. Since you need immediate assistance with your order ORD-999 that was supposed to arrive today, I need to escalate this to ensure you get the help you need right away.\n\n**ESCALAT",
+            "guard_actions": {
+              "tool_quarantined:error_retry:429": 1
+            }
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 13.27,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 2,
+            "tool_calls_failed": 2,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 1,
+            "input_tokens": 2773,
+            "output_tokens": 444,
+            "token_cost_usd": 0.015,
+            "tool_cost_usd": 0.08,
+            "total_cost_usd": 0.095,
+            "quarantined_tools": {
+              "get_order_failing": "error_retry:429"
+            },
+            "interventions": 1,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "technical",
+                "apolog"
+              ],
+              "missed": [
+                "unavailable"
+              ]
+            },
+            "final_response": "I understand this is urgent and I apologize that the order lookup system is currently experiencing technical difficulties. The system has temporarily quarantined the order status tool due to rate limiting issues.\n\n**ESCALATION PACKET:**\n- Customer: URGENT order status request\n- Order ID: ORD-999\n- I",
+            "guard_actions": {
+              "tool_quarantined:error_retry:429": 1
+            }
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 13.56,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 2,
+            "tool_calls_failed": 2,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 1,
+            "input_tokens": 2769,
+            "output_tokens": 468,
+            "token_cost_usd": 0.0153,
+            "tool_cost_usd": 0.08,
+            "total_cost_usd": 0.0953,
+            "quarantined_tools": {
+              "get_order_failing": "error_retry:429"
+            },
+            "interventions": 1,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "technical",
+                "apolog"
+              ],
+              "missed": [
+                "unavailable"
+              ]
+            },
+            "final_response": "I apologize - the order lookup system is currently experiencing technical difficulties and has been temporarily quarantined due to rate limiting issues. This is preventing me from accessing your order status for ORD-999 right now.\n\n**ESCALATION PACKET:**\n- Customer: URGENT order status request\n- Ord",
+            "guard_actions": {
+              "tool_quarantined:error_retry:429": 1
+            }
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 12.96,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 2,
+            "tool_calls_failed": 2,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 1,
+            "input_tokens": 2782,
+            "output_tokens": 465,
+            "token_cost_usd": 0.0153,
+            "tool_cost_usd": 0.08,
+            "total_cost_usd": 0.0953,
+            "quarantined_tools": {
+              "get_order_failing": "error_retry:429"
+            },
+            "interventions": 1,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "technical",
+                "apolog"
+              ],
+              "missed": [
+                "unavailable"
+              ]
+            },
+            "final_response": "I apologize - the order lookup system is currently experiencing technical difficulties and has been temporarily quarantined due to rate limiting issues. This means I cannot access your order status through our normal system right now.\n\n**ESCALATION PACKET - URGENT ORDER INQUIRY**\n- Customer: Urgent ",
+            "guard_actions": {
+              "tool_quarantined:error_retry:429": 1
+            }
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 13.1,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 2,
+            "tool_calls_failed": 2,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 1,
+            "rewrite_decisions": 1,
+            "input_tokens": 2774,
+            "output_tokens": 469,
+            "token_cost_usd": 0.0154,
+            "tool_cost_usd": 0.08,
+            "total_cost_usd": 0.0954,
+            "quarantined_tools": {
+              "get_order_failing": "error_retry:429"
+            },
+            "interventions": 1,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "unavailable",
+                "technical",
+                "apolog"
+              ],
+              "missed": []
+            },
+            "final_response": "I understand this is urgent and I apologize for the system issues. The order lookup system is currently experiencing technical difficulties and has been temporarily quarantined due to rate limiting errors.\n\n**ESCALATION PACKET - URGENT ORDER INQUIRY**\n- Customer Order ID: ORD-999\n- Issue: Delivery e",
+            "guard_actions": {
+              "tool_quarantined:error_retry:429": 1
+            }
+          }
+        ]
+      },
+      "no_guard": {
+        "runs": 5,
+        "runs_ok": 5,
+        "runs_failed": 0,
+        "stats": {
+          "turns": {
+            "p50": 4.0,
+            "p90": 4.0,
+            "values": [
+              4,
+              4,
+              4,
+              4,
+              4
+            ]
+          },
+          "cost_usd": {
+            "p50": 0.1345,
+            "p90": 0.1348,
+            "values": [
+              0.1344,
+              0.1348,
+              0.134,
+              0.1345,
+              0.1347
+            ]
+          },
+          "total_tokens": {
+            "p50": 3132.0,
+            "p90": 3160.8,
+            "values": [
+              3132,
+              3164,
+              3098,
+              3129,
+              3156
+            ]
+          },
+          "interventions": {
+            "total": 0,
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "quality": {
+            "mean": 0.4,
+            "values": [
+              0.0,
+              0.67,
+              0.33,
+              0.67,
+              0.33
+            ]
+          }
+        },
+        "per_run": [
+          {
+            "turns": 4,
+            "elapsed_s": 11.77,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 3,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 2716,
+            "output_tokens": 416,
+            "token_cost_usd": 0.0144,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1344,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 0.0,
+              "total": 3,
+              "matched": [],
+              "missed": [
+                "unavailable",
+                "technical",
+                "apolog"
+              ]
+            },
+            "final_response": "I understand this is urgent and I'm experiencing repeated rate limit errors when trying to access the order status system. The system appears to be temporarily overloaded. \n\nGiven the urgency of your situation with a delivery expected today, I recommend:\n\n1. **Immediate escalation**: I can create a ",
+            "guard_actions": {}
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 12.3,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 3,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 2718,
+            "output_tokens": 446,
+            "token_cost_usd": 0.0148,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1348,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "technical",
+                "apolog"
+              ],
+              "missed": [
+                "unavailable"
+              ]
+            },
+            "final_response": "I apologize - the order lookup system is currently experiencing temporary technical difficulties with rate limiting errors. I've attempted multiple times to retrieve your order status for ORD-999, but the system is not responding properly right now.\n\nGiven the urgency of your situation and that your",
+            "guard_actions": {}
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 11.87,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 3,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 2710,
+            "output_tokens": 388,
+            "token_cost_usd": 0.014,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.134,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 0.33,
+              "total": 3,
+              "matched": [
+                "technical"
+              ],
+              "missed": [
+                "unavailable",
+                "apolog"
+              ]
+            },
+            "final_response": "I understand this is urgent and I'm experiencing temporary system issues with our order lookup system. The system is showing rate limit errors, which means there's high traffic or a temporary technical issue.\n\nSince your delivery was supposed to arrive today and this is time-sensitive, I recommend:\n",
+            "guard_actions": {}
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 12.28,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 3,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 2706,
+            "output_tokens": 423,
+            "token_cost_usd": 0.0145,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1345,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "technical",
+                "apolog"
+              ],
+              "missed": [
+                "unavailable"
+              ]
+            },
+            "final_response": "I understand this is urgent and I apologize for the system issues. The order lookup system is currently experiencing temporary rate limiting problems. I've attempted multiple times to retrieve the status of your order ORD-999, but the system keeps returning rate limit errors.\n\nGiven the urgency of y",
+            "guard_actions": {}
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 14.32,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 3,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 2717,
+            "output_tokens": 439,
+            "token_cost_usd": 0.0147,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1347,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 0.33,
+              "total": 3,
+              "matched": [
+                "apolog"
+              ],
+              "missed": [
+                "unavailable",
+                "technical"
+              ]
+            },
+            "final_response": "I understand this is urgent and I apologize for the system issues. The order lookup system is currently experiencing rate limiting problems that are preventing me from accessing your order status for ORD-999. \n\nGiven the urgency of your situation and that your delivery was expected today, I recommen",
+            "guard_actions": {}
+          }
+        ]
+      }
+    },
+    "D: Smart Reformulation (cap enforcement)": {
+      "guard": {
+        "runs": 5,
+        "runs_ok": 5,
+        "runs_failed": 0,
+        "stats": {
+          "turns": {
+            "p50": 3.0,
+            "p90": 3.0,
+            "values": [
+              3,
+              3,
+              3,
+              3,
+              3
+            ]
+          },
+          "cost_usd": {
+            "p50": 0.1465,
+            "p90": 0.1473,
+            "values": [
+              0.1447,
+              0.1463,
+              0.1468,
+              0.1465,
+              0.1476
+            ]
+          },
+          "total_tokens": {
+            "p50": 5493.0,
+            "p90": 5548.0,
+            "values": [
+              5111,
+              5488,
+              5542,
+              5493,
+              5552
+            ]
+          },
+          "interventions": {
+            "total": 33,
+            "values": [
+              5,
+              7,
+              7,
+              7,
+              7
+            ]
+          },
+          "quality": {
+            "mean": 0.8,
+            "values": [
+              0.67,
+              1.0,
+              0.67,
+              0.67,
+              1.0
+            ]
+          }
+        },
+        "per_run": [
+          {
+            "turns": 3,
+            "elapsed_s": 16.6,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 5,
+            "rewrite_decisions": 5,
+            "input_tokens": 4331,
+            "output_tokens": 780,
+            "token_cost_usd": 0.0247,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1447,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 5,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "return",
+                "refund"
+              ],
+              "missed": [
+                "30 day"
+              ]
+            },
+            "final_response": "Based on the limited search results I was able to gather before reaching the search limit, I can provide you with the following partial information about your return policy:\n\n## Return Policy Summary (Based on Available Information)\n\n**From the search results, I found:**\n\n1. **Standard Return Window",
+            "guard_actions": {
+              "max_calls_per_tool": 1,
+              "tool_quarantined:max_calls_per_tool": 4
+            }
+          },
+          {
+            "turns": 3,
+            "elapsed_s": 16.09,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 7,
+            "rewrite_decisions": 7,
+            "input_tokens": 4672,
+            "output_tokens": 816,
+            "token_cost_usd": 0.0263,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1463,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 7,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "return",
+                "refund",
+                "30 day"
+              ],
+              "missed": []
+            },
+            "final_response": "I apologize, but I've reached the search limit after only three searches, and the initial results were quite general and didn't provide the specific detailed information you requested about your return policy. \n\nBased on the limited search results I was able to obtain, I can only provide this partia",
+            "guard_actions": {
+              "max_calls_per_tool": 1,
+              "tool_quarantined:max_calls_per_tool": 6
+            }
+          },
+          {
+            "turns": 3,
+            "elapsed_s": 17.87,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 7,
+            "rewrite_decisions": 7,
+            "input_tokens": 4694,
+            "output_tokens": 848,
+            "token_cost_usd": 0.0268,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1468,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 7,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "return",
+                "refund"
+              ],
+              "missed": [
+                "30 day"
+              ]
+            },
+            "final_response": "I apologize, but I've reached the search limit and the initial searches only returned general snippets rather than the detailed policy information you requested. Based on the limited results I was able to retrieve, here's what I found:\n\n## Partial Return Policy Information\n\nFrom the search results, ",
+            "guard_actions": {
+              "max_calls_per_tool": 1,
+              "tool_quarantined:max_calls_per_tool": 6
+            }
+          },
+          {
+            "turns": 3,
+            "elapsed_s": 16.21,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 7,
+            "rewrite_decisions": 7,
+            "input_tokens": 4659,
+            "output_tokens": 834,
+            "token_cost_usd": 0.0265,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1465,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 7,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "return",
+                "refund"
+              ],
+              "missed": [
+                "30 day"
+              ]
+            },
+            "final_response": "I apologize, but I've reached the limit for knowledge base searches in this session. Based on the limited results I was able to retrieve, I can provide you with the following partial information about your return policy:\n\n## Partial Return Policy Summary\n\nFrom the search results obtained:\n\n**General",
+            "guard_actions": {
+              "max_calls_per_tool": 1,
+              "tool_quarantined:max_calls_per_tool": 6
+            }
+          },
+          {
+            "turns": 3,
+            "elapsed_s": 18.39,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 7,
+            "rewrite_decisions": 7,
+            "input_tokens": 4636,
+            "output_tokens": 916,
+            "token_cost_usd": 0.0276,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1476,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 7,
+            "quality": {
+              "score": 1.0,
+              "total": 3,
+              "matched": [
+                "return",
+                "refund",
+                "30 day"
+              ],
+              "missed": []
+            },
+            "final_response": "I apologize, but I've reached the search limit for this session after conducting 3 searches. Based on the limited results I was able to gather, I can provide you with the following partial information about your return policy:\n\n## Partial Return Policy Summary\n\nFrom the search results obtained, I fo",
+            "guard_actions": {
+              "max_calls_per_tool": 1,
+              "tool_quarantined:max_calls_per_tool": 6
+            }
+          }
+        ]
+      },
+      "no_guard": {
+        "runs": 5,
+        "runs_ok": 5,
+        "runs_failed": 0,
+        "stats": {
+          "turns": {
+            "p50": 5.0,
+            "p90": 5.0,
+            "values": [
+              5,
+              5,
+              5,
+              4,
+              5
+            ]
+          },
+          "cost_usd": {
+            "p50": 0.8607,
+            "p90": 0.8617,
+            "values": [
+              0.8189,
+              0.8607,
+              0.8615,
+              0.6436,
+              0.8619
+            ]
+          },
+          "total_tokens": {
+            "p50": 14501.0,
+            "p90": 14619.0,
+            "values": [
+              14213,
+              14501,
+              14610,
+              9734,
+              14625
+            ]
+          },
+          "interventions": {
+            "total": 0,
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "quality": {
+            "mean": 0.67,
+            "values": [
+              0.67,
+              0.67,
+              0.67,
+              0.67,
+              0.67
+            ]
+          }
+        },
+        "per_run": [
+          {
+            "turns": 5,
+            "elapsed_s": 25.3,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 19,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 12862,
+            "output_tokens": 1351,
+            "token_cost_usd": 0.0589,
+            "tool_cost_usd": 0.76,
+            "total_cost_usd": 0.8189,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "return",
+                "refund"
+              ],
+              "missed": [
+                "30 day"
+              ]
+            },
+            "final_response": "Based on my comprehensive search of the knowledge base, I can provide you with a summary of the available information about your return policy, though the search results indicate that detailed policy documentation may be housed in specific policy documents that weren't fully captured in these search",
+            "guard_actions": {}
+          },
+          {
+            "turns": 5,
+            "elapsed_s": 27.9,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 20,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 13072,
+            "output_tokens": 1429,
+            "token_cost_usd": 0.0607,
+            "tool_cost_usd": 0.8,
+            "total_cost_usd": 0.8607,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "return",
+                "refund"
+              ],
+              "missed": [
+                "30 day"
+              ]
+            },
+            "final_response": "Based on my comprehensive search of the knowledge base, I can provide you with a summary of the available information about your return policy, though the search results indicate that detailed policy documentation may be stored in specific policy documents that aren't being fully retrieved with thes",
+            "guard_actions": {}
+          },
+          {
+            "turns": 5,
+            "elapsed_s": 27.84,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 20,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 13137,
+            "output_tokens": 1473,
+            "token_cost_usd": 0.0615,
+            "tool_cost_usd": 0.8,
+            "total_cost_usd": 0.8615,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "return",
+                "refund"
+              ],
+              "missed": [
+                "30 day"
+              ]
+            },
+            "final_response": "Based on my comprehensive search of the knowledge base, I can provide you with a summary of the available information about your return policy, though the search results indicate that detailed policy information may be contained in specific policy documents that weren't fully retrieved. Here's what ",
+            "guard_actions": {}
+          },
+          {
+            "turns": 4,
+            "elapsed_s": 22.64,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 15,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 8537,
+            "output_tokens": 1197,
+            "token_cost_usd": 0.0436,
+            "tool_cost_usd": 0.6,
+            "total_cost_usd": 0.6436,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "return",
+                "refund"
+              ],
+              "missed": [
+                "30 day"
+              ]
+            },
+            "final_response": "Based on my comprehensive search of the knowledge base, I can provide you with the following summary of your return policy information. However, I should note that the search results are providing high-level overviews rather than detailed policy specifics. Here's what I found:\n\n## Comprehensive Retu",
+            "guard_actions": {}
+          },
+          {
+            "turns": 5,
+            "elapsed_s": 29.75,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 20,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 13122,
+            "output_tokens": 1503,
+            "token_cost_usd": 0.0619,
+            "tool_cost_usd": 0.8,
+            "total_cost_usd": 0.8619,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 0.67,
+              "total": 3,
+              "matched": [
+                "return",
+                "refund"
+              ],
+              "missed": [
+                "30 day"
+              ]
+            },
+            "final_response": "Based on my comprehensive search through the knowledge base, I can provide you with a summary of what information is available regarding your return policy. However, the search results indicate that the detailed policy information may be stored in specific policy documents that aren't being fully ca",
+            "guard_actions": {}
+          }
+        ]
+      }
+    },
+    "E: Flagship \u2014 Guard + Good Answer": {
+      "guard": {
+        "runs": 5,
+        "runs_ok": 5,
+        "runs_failed": 0,
+        "stats": {
+          "turns": {
+            "p50": 3.0,
+            "p90": 3.0,
+            "values": [
+              2,
+              3,
+              3,
+              2,
+              3
+            ]
+          },
+          "cost_usd": {
+            "p50": 0.1446,
+            "p90": 0.1453,
+            "values": [
+              0.1375,
+              0.1451,
+              0.1446,
+              0.1372,
+              0.1454
+            ]
+          },
+          "total_tokens": {
+            "p50": 5368.0,
+            "p90": 5419.0,
+            "values": [
+              3185,
+              5401,
+              5368,
+              3165,
+              5431
+            ]
+          },
+          "interventions": {
+            "total": 16,
+            "values": [
+              2,
+              4,
+              4,
+              2,
+              4
+            ]
+          },
+          "quality": {
+            "mean": 1.0,
+            "values": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        },
+        "per_run": [
+          {
+            "turns": 2,
+            "elapsed_s": 12.14,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 2,
+            "rewrite_decisions": 2,
+            "input_tokens": 2522,
+            "output_tokens": 663,
+            "token_cost_usd": 0.0175,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1375,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 2,
+            "quality": {
+              "score": 1.0,
+              "total": 5,
+              "matched": [
+                "14",
+                "cooling",
+                "digital",
+                "subscription",
+                "refund"
+              ],
+              "missed": []
+            },
+            "final_response": "Based on my searches of the knowledge base, I can provide you with the comprehensive information about EU digital product purchases:\n\n## **Cooling-Off Period: 14 Calendar Days**\n\nThe exact cooling-off period for EU digital product purchases is **14 calendar days** under the Consumer Rights Directive",
+            "guard_actions": {
+              "max_calls_per_tool": 1,
+              "tool_quarantined:max_calls_per_tool": 1
+            }
+          },
+          {
+            "turns": 3,
+            "elapsed_s": 14.6,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 4,
+            "rewrite_decisions": 4,
+            "input_tokens": 4663,
+            "output_tokens": 738,
+            "token_cost_usd": 0.0251,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1451,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 4,
+            "quality": {
+              "score": 1.0,
+              "total": 5,
+              "matched": [
+                "14",
+                "cooling",
+                "digital",
+                "subscription",
+                "refund"
+              ],
+              "missed": []
+            },
+            "final_response": "Based on my searches of the knowledge base, I can provide you with comprehensive information about EU digital product cooling-off periods:\n\n## **Exact Cooling-Off Period**\n**14 calendar days** - This is the specific duration for EU customers under the Consumer Rights Directive 2011/83/EU.\n\n## **Digi",
+            "guard_actions": {
+              "max_calls_per_tool": 1,
+              "tool_quarantined:max_calls_per_tool": 3
+            }
+          },
+          {
+            "turns": 3,
+            "elapsed_s": 13.45,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 4,
+            "rewrite_decisions": 4,
+            "input_tokens": 4657,
+            "output_tokens": 711,
+            "token_cost_usd": 0.0246,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1446,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 4,
+            "quality": {
+              "score": 1.0,
+              "total": 5,
+              "matched": [
+                "14",
+                "cooling",
+                "digital",
+                "subscription",
+                "refund"
+              ],
+              "missed": []
+            },
+            "final_response": "Based on my searches of the knowledge base, I can provide you with comprehensive information about EU digital product purchases:\n\n## **Cooling-Off Period: 14 Calendar Days**\n\nThe exact cooling-off period for EU digital product purchases is **14 calendar days** under the Consumer Rights Directive 201",
+            "guard_actions": {
+              "max_calls_per_tool": 1,
+              "tool_quarantined:max_calls_per_tool": 3
+            }
+          },
+          {
+            "turns": 2,
+            "elapsed_s": 12.33,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 2,
+            "rewrite_decisions": 2,
+            "input_tokens": 2524,
+            "output_tokens": 641,
+            "token_cost_usd": 0.0172,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1372,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 2,
+            "quality": {
+              "score": 1.0,
+              "total": 5,
+              "matched": [
+                "14",
+                "cooling",
+                "digital",
+                "subscription",
+                "refund"
+              ],
+              "missed": []
+            },
+            "final_response": "Based on my searches of the knowledge base, I can provide you with comprehensive information about EU digital product purchases:\n\n## **Exact Cooling-Off Period**\n**14 calendar days** - This is the specific cooling-off period for EU customers under the Consumer Rights Directive 2011/83/EU.\n\n## **Digi",
+            "guard_actions": {
+              "max_calls_per_tool": 1,
+              "tool_quarantined:max_calls_per_tool": 1
+            }
+          },
+          {
+            "turns": 3,
+            "elapsed_s": 15.27,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 3,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 4,
+            "rewrite_decisions": 4,
+            "input_tokens": 4672,
+            "output_tokens": 759,
+            "token_cost_usd": 0.0254,
+            "tool_cost_usd": 0.12,
+            "total_cost_usd": 0.1454,
+            "quarantined_tools": {
+              "search_kb": "max_calls_per_tool"
+            },
+            "interventions": 4,
+            "quality": {
+              "score": 1.0,
+              "total": 5,
+              "matched": [
+                "14",
+                "cooling",
+                "digital",
+                "subscription",
+                "refund"
+              ],
+              "missed": []
+            },
+            "final_response": "Based on my searches of the knowledge base, I can provide you with comprehensive information about EU digital product purchases:\n\n## **Exact Cooling-Off Period**\n**14 calendar days** - This is the specific cooling-off period for EU customers under the Consumer Rights Directive 2011/83/EU.\n\n## **Digi",
+            "guard_actions": {
+              "max_calls_per_tool": 1,
+              "tool_quarantined:max_calls_per_tool": 3
+            }
+          }
+        ]
+      },
+      "no_guard": {
+        "runs": 5,
+        "runs_ok": 5,
+        "runs_failed": 0,
+        "stats": {
+          "turns": {
+            "p50": 3.0,
+            "p90": 3.0,
+            "values": [
+              3,
+              3,
+              3,
+              3,
+              3
+            ]
+          },
+          "cost_usd": {
+            "p50": 0.3494,
+            "p90": 0.3502,
+            "values": [
+              0.3506,
+              0.3494,
+              0.3494,
+              0.3495,
+              0.3494
+            ]
+          },
+          "total_tokens": {
+            "p50": 6698.0,
+            "p90": 6747.0,
+            "values": [
+              6777,
+              6690,
+              6693,
+              6702,
+              6698
+            ]
+          },
+          "interventions": {
+            "total": 0,
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "quality": {
+            "mean": 1.0,
+            "values": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        },
+        "per_run": [
+          {
+            "turns": 3,
+            "elapsed_s": 16.36,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 8,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 5924,
+            "output_tokens": 853,
+            "token_cost_usd": 0.0306,
+            "tool_cost_usd": 0.32,
+            "total_cost_usd": 0.3506,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 1.0,
+              "total": 5,
+              "matched": [
+                "14",
+                "cooling",
+                "digital",
+                "subscription",
+                "refund"
+              ],
+              "missed": []
+            },
+            "final_response": "Based on my comprehensive search of the knowledge base, here are the specific details about EU digital product purchases:\n\n## **Cooling-Off Period: 14 Calendar Days**\nThe exact cooling-off period for EU digital product purchases is **14 calendar days** under the Consumer Rights Directive 2011/83/EU.",
+            "guard_actions": {}
+          },
+          {
+            "turns": 3,
+            "elapsed_s": 14.49,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 8,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 5916,
+            "output_tokens": 774,
+            "token_cost_usd": 0.0294,
+            "tool_cost_usd": 0.32,
+            "total_cost_usd": 0.3494,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 1.0,
+              "total": 5,
+              "matched": [
+                "14",
+                "cooling",
+                "digital",
+                "subscription",
+                "refund"
+              ],
+              "missed": []
+            },
+            "final_response": "Based on my thorough search of the knowledge base, here are the exact details for EU digital product purchases:\n\n## **Cooling-Off Period: 14 Calendar Days**\n\nThe exact cooling-off period for EU digital product purchases is **14 calendar days** under the Consumer Rights Directive 2011/83/EU.\n\n## **Di",
+            "guard_actions": {}
+          },
+          {
+            "turns": 3,
+            "elapsed_s": 15.08,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 8,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 5916,
+            "output_tokens": 777,
+            "token_cost_usd": 0.0294,
+            "tool_cost_usd": 0.32,
+            "total_cost_usd": 0.3494,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 1.0,
+              "total": 5,
+              "matched": [
+                "14",
+                "cooling",
+                "digital",
+                "subscription",
+                "refund"
+              ],
+              "missed": []
+            },
+            "final_response": "Based on my thorough search of the knowledge base, here are the complete details about EU cooling-off periods for digital products:\n\n## **Cooling-Off Period Duration**\n**14 calendar days** - This is the exact cooling-off period for EU digital product purchases under the Consumer Rights Directive 201",
+            "guard_actions": {}
+          },
+          {
+            "turns": 3,
+            "elapsed_s": 15.77,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 8,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 5923,
+            "output_tokens": 779,
+            "token_cost_usd": 0.0295,
+            "tool_cost_usd": 0.32,
+            "total_cost_usd": 0.3495,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 1.0,
+              "total": 5,
+              "matched": [
+                "14",
+                "cooling",
+                "digital",
+                "subscription",
+                "refund"
+              ],
+              "missed": []
+            },
+            "final_response": "Based on my thorough search of the knowledge base, here are the complete details about EU cooling-off periods for digital products:\n\n## **Exact Cooling-Off Period Duration**\n**14 calendar days** - This is the specific period mandated under the EU Consumer Rights Directive 2011/83/EU.\n\n## **Digital C",
+            "guard_actions": {}
+          },
+          {
+            "turns": 3,
+            "elapsed_s": 14.87,
+            "ok": true,
+            "llm_error": null,
+            "tool_calls_executed": 8,
+            "tool_calls_failed": 0,
+            "tool_calls_cached": 0,
+            "tool_calls_denied": 0,
+            "rewrite_decisions": 0,
+            "input_tokens": 5923,
+            "output_tokens": 775,
+            "token_cost_usd": 0.0294,
+            "tool_cost_usd": 0.32,
+            "total_cost_usd": 0.3494,
+            "quarantined_tools": {},
+            "interventions": 0,
+            "quality": {
+              "score": 1.0,
+              "total": 5,
+              "matched": [
+                "14",
+                "cooling",
+                "digital",
+                "subscription",
+                "refund"
+              ],
+              "missed": []
+            },
+            "final_response": "Based on my comprehensive search of the knowledge base, here are the exact details for EU digital product purchases:\n\n## **Cooling-Off Period: 14 Calendar Days**\nThe exact cooling-off period for EU digital product purchases is **14 calendar days** under the Consumer Rights Directive 2011/83/EU. This",
+            "guard_actions": {}
+          }
+        ]
+      }
+    }
+  },
+  "totals": {
+    "total_runs_ok": 25,
+    "total_runs_failed": 0,
+    "total_interventions": 64,
+    "guard_trigger_rate": 1.0
+  }
+}

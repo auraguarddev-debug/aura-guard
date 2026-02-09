@@ -1,0 +1,869 @@
+[
+    {
+        "scenario_id": "ag_bench_01",
+        "scenario_name": "KB Query Jitter Loop",
+        "description": "Agent searches for refund policy with progressively longer queries",
+        "failure_mode": "argument_jitter",
+        "tool_cost": 0.04,
+        "steps": [
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "refund policy"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "refund policy EU"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "refund policy EU customers"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "refund policy EU customers 2024"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "EU customer refund policy 2024 Germany"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "EU customer refund return policy 2024 Germany law"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "EU consumer refund return policy 2024 2025 Germany law directive"
+                }
+            },
+            {
+                "type": "llm",
+                "text": "I'm still researching your question about the refund policy."
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "refund return consumer protection policy EU Germany"
+                }
+            },
+            {
+                "type": "llm",
+                "text": "I'm looking into the specific refund regulations for your region."
+            },
+            {
+                "type": "llm",
+                "text": "I'm still looking into the refund policy for EU customers."
+            },
+            {
+                "type": "llm",
+                "text": "I apologize for the delay. I'm researching EU refund policies."
+            },
+            {
+                "type": "llm",
+                "text": "I apologize for the delay. I'm researching EU refund policies."
+            }
+        ]
+    },
+    {
+        "scenario_id": "ag_bench_02",
+        "scenario_name": "Double Refund Attempt",
+        "description": "Agent processes the same refund multiple times",
+        "failure_mode": "side_effect_repeat",
+        "tool_cost": 0.04,
+        "steps": [
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-12345"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "refund",
+                "args": {
+                    "order_id": "ORD-12345",
+                    "amount": 49.99
+                },
+                "side_effect": true
+            },
+            {
+                "type": "tool",
+                "name": "refund",
+                "args": {
+                    "order_id": "ORD-12345",
+                    "amount": 49.99
+                },
+                "side_effect": true
+            },
+            {
+                "type": "tool",
+                "name": "refund",
+                "args": {
+                    "order_id": "ORD-12345",
+                    "amount": 49.99
+                },
+                "side_effect": true
+            }
+        ]
+    },
+    {
+        "scenario_id": "ag_bench_03",
+        "scenario_name": "Error Retry Spiral",
+        "description": "Downstream API returns errors, agent retries blindly",
+        "failure_mode": "error_retry",
+        "tool_cost": 0.04,
+        "steps": [
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-999"
+                },
+                "result_ok": false,
+                "error_code": "429"
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-999"
+                },
+                "result_ok": false,
+                "error_code": "429"
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-999"
+                },
+                "result_ok": false,
+                "error_code": "429"
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-999"
+                },
+                "result_ok": false,
+                "error_code": "429"
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-999"
+                },
+                "result_ok": false,
+                "error_code": "429"
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "order lookup alternative"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-999"
+                },
+                "result_ok": false,
+                "error_code": "429"
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-999"
+                },
+                "result_ok": false,
+                "error_code": "429"
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-999"
+                },
+                "result_ok": false,
+                "error_code": "429"
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-999"
+                },
+                "result_ok": false,
+                "error_code": "429"
+            }
+        ]
+    },
+    {
+        "scenario_id": "ag_bench_04",
+        "scenario_name": "CRM Lookup Cascade",
+        "description": "Agent searches for customer by every possible identifier",
+        "failure_mode": "argument_jitter",
+        "tool_cost": 0.04,
+        "steps": [
+            {
+                "type": "tool",
+                "name": "search",
+                "args": {
+                    "query": "John Smith"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search",
+                "args": {
+                    "query": "John Smith email"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search",
+                "args": {
+                    "query": "John Smith john@example.com"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search",
+                "args": {
+                    "query": "John Smith john@example.com order"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search",
+                "args": {
+                    "query": "john@example.com customer profile"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search",
+                "args": {
+                    "query": "john@example.com customer profile account"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search",
+                "args": {
+                    "query": "John Smith customer account profile email john@example.com"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search",
+                "args": {
+                    "query": "John Smith account email john@example.com customer"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search",
+                "args": {
+                    "query": "customer John Smith john@example.com profile lookup"
+                }
+            }
+        ]
+    },
+    {
+        "scenario_id": "ag_bench_05",
+        "scenario_name": "Stall + Apology Spiral",
+        "description": "Agent enters a loop of apologetic non-responses",
+        "failure_mode": "stall",
+        "tool_cost": 0.04,
+        "steps": [
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "order status"
+                }
+            },
+            {
+                "type": "llm",
+                "text": "I apologize for the inconvenience. Let me look into this for you."
+            },
+            {
+                "type": "llm",
+                "text": "I'm sorry for the delay. I'm still working on finding that information."
+            },
+            {
+                "type": "llm",
+                "text": "I apologize, I'm having trouble locating that order. Let me try again."
+            },
+            {
+                "type": "llm",
+                "text": "I'm sorry for the inconvenience. I'm still looking into this for you."
+            },
+            {
+                "type": "llm",
+                "text": "I apologize for the delay. I'm continuing to investigate this issue."
+            },
+            {
+                "type": "llm",
+                "text": "I'm sorry, I'm still working on this. Thank you for your patience."
+            }
+        ]
+    },
+    {
+        "scenario_id": "ag_bench_06",
+        "scenario_name": "Mixed Degradation",
+        "description": "Starts with legitimate calls then degrades into loops",
+        "failure_mode": "mixed",
+        "tool_cost": 0.04,
+        "steps": [
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-500"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "shipping delay policy"
+                }
+            },
+            {
+                "type": "llm",
+                "text": "I found your order. It was shipped on January 15 and appears to be delayed in transit."
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "shipping delay refund policy"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "shipping delay compensation policy"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "shipping delay refund compensation"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "shipping delay refund compensation customer"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "shipping delay refund compensation customer service"
+                }
+            },
+            {
+                "type": "llm",
+                "text": "I'm researching our compensation policy for shipping delays."
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-500"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-500"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-500"
+                }
+            },
+            {
+                "type": "llm",
+                "text": "I'm still checking on the shipping status for your order."
+            },
+            {
+                "type": "llm",
+                "text": "I apologize, I'm still looking into the shipping status."
+            },
+            {
+                "type": "llm",
+                "text": "I'm sorry for the delay. Still checking on the shipping for your order."
+            }
+        ]
+    },
+    {
+        "scenario_id": "ag_bench_07",
+        "scenario_name": "RAG Retrieval Loop",
+        "description": "Agent rephrases the same RAG query endlessly",
+        "failure_mode": "argument_jitter",
+        "tool_cost": 0.04,
+        "steps": [
+            {
+                "type": "tool",
+                "name": "rag_retrieve",
+                "args": {
+                    "query": "how to reset password"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "rag_retrieve",
+                "args": {
+                    "query": "reset password instructions"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "rag_retrieve",
+                "args": {
+                    "query": "password reset steps guide"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "rag_retrieve",
+                "args": {
+                    "query": "step by step password reset guide"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "rag_retrieve",
+                "args": {
+                    "query": "password reset how to step by step instructions"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "rag_retrieve",
+                "args": {
+                    "query": "how to reset password step by step instructions guide"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "rag_retrieve",
+                "args": {
+                    "query": "reset password step by step instructions guide tutorial"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "rag_retrieve",
+                "args": {
+                    "query": "password reset instructions guide tutorial help"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "rag_retrieve",
+                "args": {
+                    "query": "password reset instructions guide tutorial help desk"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "rag_retrieve",
+                "args": {
+                    "query": "password reset guide help tutorial instructions"
+                }
+            },
+            {
+                "type": "llm",
+                "text": "I'm having trouble finding the exact instructions. Let me try again."
+            }
+        ]
+    },
+    {
+        "scenario_id": "ag_bench_08",
+        "scenario_name": "Ticket Lookup Cascade",
+        "description": "Agent checks related tickets endlessly",
+        "failure_mode": "identical_repeat",
+        "tool_cost": 0.04,
+        "steps": [
+            {
+                "type": "tool",
+                "name": "get_ticket",
+                "args": {
+                    "ticket_id": "T-100"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_ticket",
+                "args": {
+                    "ticket_id": "T-101"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_ticket",
+                "args": {
+                    "ticket_id": "T-102"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_ticket",
+                "args": {
+                    "ticket_id": "T-100"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_ticket",
+                "args": {
+                    "ticket_id": "T-101"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_ticket",
+                "args": {
+                    "ticket_id": "T-100"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_ticket",
+                "args": {
+                    "ticket_id": "T-101"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_ticket",
+                "args": {
+                    "ticket_id": "T-100"
+                }
+            }
+        ]
+    },
+    {
+        "scenario_id": "ag_bench_09",
+        "scenario_name": "Side-Effect Storm",
+        "description": "Agent tries multiple side-effect actions on the same ticket",
+        "failure_mode": "side_effect_repeat",
+        "tool_cost": 0.04,
+        "steps": [
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-777"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "refund",
+                "args": {
+                    "order_id": "ORD-777",
+                    "amount": 30
+                },
+                "side_effect": true
+            },
+            {
+                "type": "tool",
+                "name": "send_reply",
+                "args": {
+                    "ticket_id": "T-200",
+                    "text": "Refund processed."
+                },
+                "side_effect": true
+            },
+            {
+                "type": "tool",
+                "name": "refund",
+                "args": {
+                    "order_id": "ORD-777",
+                    "amount": 30
+                },
+                "side_effect": true
+            },
+            {
+                "type": "tool",
+                "name": "send_reply",
+                "args": {
+                    "ticket_id": "T-200",
+                    "text": "Refund processed."
+                },
+                "side_effect": true
+            },
+            {
+                "type": "tool",
+                "name": "cancel",
+                "args": {
+                    "order_id": "ORD-777"
+                },
+                "side_effect": true
+            },
+            {
+                "type": "tool",
+                "name": "cancel",
+                "args": {
+                    "order_id": "ORD-777"
+                },
+                "side_effect": true
+            }
+        ]
+    },
+    {
+        "scenario_id": "ag_bench_10",
+        "scenario_name": "Budget Overrun",
+        "description": "Many small legitimate calls that cumulatively exceed budget",
+        "failure_mode": "budget",
+        "tool_cost": 0.04,
+        "steps": [
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A1"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A2"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A3"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "bulk order discount"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A4"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A5"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "loyalty program benefits"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A6"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A7"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A8"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "return policy electronics"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A9"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A10"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "warranty claim process"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A11"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A12"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A13"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "credit memo process"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A14"
+                }
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-A15"
+                }
+            }
+        ]
+    },
+    {
+        "scenario_id": "ag_bench_11",
+        "scenario_name": "Healthy Workflow (FP check)",
+        "description": "Legitimate varied workflow: different tools, distinct args, no loops. Guard should allow ALL calls (zero false positives).",
+        "failure_mode": "none",
+        "tool_cost": 0.04,
+        "steps": [
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-100"
+                }
+            },
+            {
+                "type": "llm",
+                "text": "I found your order. Let me look up the shipping details."
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "shipping tracking FAQ"
+                }
+            },
+            {
+                "type": "llm",
+                "text": "According to our records, your order shipped on January 15."
+            },
+            {
+                "type": "tool",
+                "name": "get_order",
+                "args": {
+                    "order_id": "ORD-200"
+                }
+            },
+            {
+                "type": "llm",
+                "text": "I also found the second order you mentioned."
+            },
+            {
+                "type": "tool",
+                "name": "search_kb",
+                "args": {
+                    "query": "return policy electronics"
+                }
+            },
+            {
+                "type": "llm",
+                "text": "Our return policy allows 30 days for electronics. Let me process your request."
+            },
+            {
+                "type": "tool",
+                "name": "refund",
+                "args": {
+                    "order_id": "ORD-200",
+                    "amount": 29.99
+                },
+                "side_effect": true
+            },
+            {
+                "type": "llm",
+                "text": "Your refund of $29.99 has been processed for order ORD-200. Is there anything else I can help with?"
+            }
+        ]
+    }
+]
