@@ -2,7 +2,7 @@
 
 Stop AI agents from **looping on tools** and accidentally doing the same action twice (double refunds, duplicate emails, endless retries).
 
-Aura Guard is a small “safety layer” you put **between your agent and its tools** (search, refund, get_order, send_email, etc.).  
+Aura Guard is **reliability middleware for tool-using agents**. It sits **between your agent and its tools** (search, refund, get_order, send_email, etc.) and focuses on three controls: **idempotency, circuit breaking, and loop detection**.  
 Before a tool runs, Aura Guard answers:
 
 - ✅ **ALLOW** → run the tool  
@@ -12,9 +12,9 @@ Before a tool runs, Aura Guard answers:
 - 🧑‍💼 **ESCALATE / FINALIZE** → stop the run safely  
 
 **Core goals**
-- Save money by cutting wasted tool calls
-- Prevent repeat side-effects (refund twice, email twice, cancel twice)
+- Prevent duplicate side-effects (refund twice, email twice, cancel twice)
 - Contain retry storms (429 / timeouts / 5xx)
+- Detect loops early and stop runaways
 - Provide deterministic, inspectable decisions
 
 ✅ Python 3.10+  
@@ -26,11 +26,12 @@ Before a tool runs, Aura Guard answers:
 ## Table of contents
 
 - [30-second demo (no API key)](#30-second-demo-no-api-key)
+- [How it works (1 minute explanation)](#how-it-works-1-minute-explanation)
 - [Install](#install)
 - [What problem does this solve](#what-problem-does-this-solve)
+- [Why not just max_steps / retries / idempotency keys?](#why-not-just-max_steps--retries--idempotency-keys)
 - [2-minute integration (copy/paste)](#2-minute-integration-copypaste)
 - [Live A/B (real model) — optional](#live-ab-real-model--optional)
-- [How it works (1 minute explanation)](#how-it-works-1-minute-explanation)
 - [Configuration (the knobs that matter)](#configuration-the-knobs-that-matter)
 - [LangChain (optional)](#langchain-optional)
 - [Telemetry & persistence (optional)](#telemetry--persistence-optional)
@@ -90,6 +91,18 @@ This prints a report showing cost deltas across multiple failure scenarios (loop
 
 ---
 
+## How it works (1 minute explanation)
+
+![How Aura Guard sits between your agent loop and tools](docs/assets/how-it-works.png)
+
+Aura Guard keeps run-scoped state and makes deterministic decisions from it:
+- repeated/near-repeated calls (loop detection)
+- repeated tool errors (circuit breaker behavior)
+- side-effect replay risk (idempotency protection)
+- output stall signals and run cost
+
+---
+
 ## Install
 
 ### If you are installing from a cloned repo
@@ -124,12 +137,11 @@ Agents that can call tools are powerful — but they fail in very predictable wa
 - They see a tool response like “pending” and **do the side-effect twice**.
 - They produce “sorry, still checking…” text and **stall**.
 
-A simple “max steps” limit helps, but it’s a blunt tool:
-- it might stop too early (bad user experience), or
-- it might stop too late (wastes money and triggers side effects).
+## Why not just max_steps / retries / idempotency keys?
 
-Aura Guard is a more targeted layer: it watches the tool calls and outputs and says:  
-**“This is looping — stop here”** (or **reuse cache**, or **rewrite**, or **escalate**).
+- **`max_steps` is blunt**: it does not distinguish productive steps from runaway loops.
+- **Backoff/retry libraries don’t prevent duplicate side effects**: they retry transport failures, not business-level replay risk.
+- **Idempotency keys help side effects but not loops/cost/quarantine**: they protect write operations, but they do not stop search spirals, repeated failed reads, or stalled agent outputs.
 
 ---
 
@@ -224,24 +236,6 @@ Example numbers (5 runs per scenario):
 | E: Flagship — Guard + Good Answer | $0.3497 | $0.1420 | $0.2077 |
 
 </details>
-
----
-
-## How it works (1 minute explanation)
-
-Think of Aura Guard like a **seatbelt** for agents:
-
-![How Aura Guard sits between your agent loop and tools](docs/assets/how-it-works.png)
-
-Aura Guard keeps a small “memory” of what happened in the run:
-- which tools were called
-- whether calls look repeated or near‑repeated
-- whether a tool is failing repeatedly
-- whether a side-effect already happened
-- whether the agent is stalling
-- how much estimated cost has been spent
-
-Then it makes a deterministic decision.
 
 ---
 
