@@ -22,7 +22,7 @@ The JSON artifact is committed in:
 
 ## A/B summary (5 runs per scenario)
 
-![A/B summary table](assets/ab_summary.png)
+![A/B summary table](assets/live_ab_summary.png)
 
 ---
 
