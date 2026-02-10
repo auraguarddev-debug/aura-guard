@@ -12,6 +12,7 @@
 ### Release hygiene
 
 - Version bump to **0.3.1** across package metadata.
+- Tests: 44 total (added shadow mode / async / default-key warning coverage)
 
 ## 0.3.0 — 2026-02-07
 

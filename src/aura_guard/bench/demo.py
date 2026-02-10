@@ -91,6 +91,7 @@ def _run_aura_guard() -> _Row:
     guard = AgentGuard(
         max_cost_per_run=0.50,
         side_effect_tools={"refund", "send_reply", "cancel"},
+        secret_key=b"aura_guard_demo_key",
     )
     executed = side_fx = 0
     terminated = None
