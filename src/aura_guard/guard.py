@@ -243,7 +243,7 @@ class GuardState:
 # ================================
 
 class AuraGuard:
-    """Cost governance and loop prevention for AI agents.
+    """Reliability middleware for tool-using agents: idempotency, circuit breaking, and loop detection.
 
     Call on_tool_call_request() before each tool execution,
     on_tool_result() after each tool execution,
