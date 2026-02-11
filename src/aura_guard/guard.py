@@ -30,7 +30,7 @@ from hashlib import sha256
 from typing import Any, Dict, List, Optional, Set, Tuple
 from uuid import uuid4
 
-from .config import AuraGuardConfig
+from .config import AuraGuardConfig, ToolAccess
 from .telemetry import Telemetry
 from .types import CostEvent, PolicyAction, PolicyDecision, ToolCall, ToolCallSig, ToolResult
 
@@ -406,20 +406,18 @@ class AuraGuard:
         Returns a PolicyDecision telling the orchestrator what to do.
         """
         tool = call.name
-        side_effect = self.cfg.is_side_effect_tool(tool, call.side_effect)
-        call.side_effect = side_effect
+        is_side_effect = self.cfg.is_side_effect_tool(tool, call.side_effect)
 
         args_sig = _args_sig(self.cfg, call.args, tool_name=tool)
         t_sig = _ticket_sig(self.cfg, call.ticket_id, state.run_id)
 
-        sig = ToolCallSig(name=tool, args_sig=args_sig, ticket_sig=t_sig, side_effect=side_effect)
+        sig = ToolCallSig(name=tool, args_sig=args_sig, ticket_sig=t_sig, side_effect=is_side_effect)
 
         # ──────────────────────────────────────────
         # Primitive 7: Tool policy layer (deny/approve)
         # ──────────────────────────────────────────
         policy = self.cfg.get_tool_policy(tool)
         if policy is not None:
-            from .config import ToolAccess
             if policy.access == ToolAccess.DENY:
                 reason = policy.deny_reason or f"tool_denied_by_policy"
                 self._emit("tool_policy_denied", state=state, tool=tool, reason=reason)
@@ -541,7 +539,7 @@ class AuraGuard:
         # ──────────────────────────────────────────
         # Primitive 4: Side-effect gating + idempotency
         # ──────────────────────────────────────────
-        if side_effect:
+        if is_side_effect:
             state.attempted_side_effect_calls[tool] = (
                 state.attempted_side_effect_calls.get(tool, 0) + 1
             )
@@ -792,10 +790,13 @@ class AuraGuard:
                 amount=est, cumulative=state.cumulative_cost,
             ))
 
-    def on_llm_output(self, *, state: GuardState, text: str) -> Optional[PolicyDecision]:
+    def on_llm_output(self, *, state: GuardState, text: Any) -> Optional[PolicyDecision]:
         """Inspect an assistant output to detect stall/no-state-change."""
 
-        if text is None or text == "":
+        if not isinstance(text, str):
+            return None
+
+        if text == "":
             return None
 
         # If we previously asked for a forced outcome, try to parse it.
