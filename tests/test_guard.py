@@ -16,12 +16,16 @@ from aura_guard import (
     AgentGuard,
     AuraGuard,
     AuraGuardConfig,
+    CompositeTelemetry,
     CostModel,
     GuardState,
     PolicyAction,
+    ToolAccess,
     ToolCall,
+    ToolPolicy,
     ToolResult,
 )
+from aura_guard.guard import _canonicalize, _classify_error_code, _stall_pattern_score
 from aura_guard.telemetry import InMemoryTelemetry, Telemetry
 
 
@@ -147,6 +151,82 @@ class TestConfigValidation:
     def test_rejects_invalid_thresholds(self, kwargs, message):
         with pytest.raises(ValueError, match=message):
             AuraGuardConfig(**kwargs)
+
+
+class TestInternalHelpers:
+    @pytest.mark.parametrize(
+        ("value", "expected"),
+        [
+            ("timeout", "timeout"),
+            ("429", "429"),
+            ("5xx", "5xx"),
+            ("conn", "connection_error"),
+            ("unknown", "unknown"),
+            ("", "unknown"),
+            (None, "unknown"),
+        ],
+    )
+    def test_classify_error_code(self, value, expected):
+        assert _classify_error_code(value) == expected
+
+    @pytest.mark.parametrize(
+        ("text", "expected"),
+        [
+            ("No stall text here", 0.0),
+            ("I apologize for the inconvenience", 0.6),
+            ("I am still working on this", 0.4),
+            ("I apologize. Please wait one moment for this issue.", 1.0),
+        ],
+    )
+    def test_stall_pattern_score(self, text, expected):
+        assert _stall_pattern_score(text) == pytest.approx(expected)
+
+    def test_canonicalize_complex_types(self):
+        class FancyObject:
+            def __str__(self) -> str:
+                return "fancy"
+
+        result = _canonicalize(
+            {
+                "bytes": b"abc",
+                "set": {3, 1, 2},
+                "nested": {"z": {"b", "a"}, "a": 1},
+                "unknown": FancyObject(),
+            }
+        )
+
+        assert result["bytes"] == {
+            "__bytes__": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+        }
+        assert result["set"] == [1, 2, 3]
+        assert result["nested"] == {"a": 1, "z": ["a", "b"]}
+        assert result["unknown"] == "fancy"
+
+
+class TestConfigHelpers:
+    def test_helper_methods(self):
+        policy = ToolPolicy(access=ToolAccess.DENY, max_calls=2)
+        cfg = AuraGuardConfig(
+            never_cache_tools={"live_feed"},
+            arg_ignore_keys={"search_kb": {"timestamp"}},
+            tool_policies={"delete_user": policy},
+            max_calls_per_tool=5,
+        )
+
+        assert cfg.is_cacheable("search_kb") is True
+        assert cfg.is_cacheable("live_feed") is False
+        assert cfg.get_arg_ignore_keys("search_kb") == {"timestamp"}
+        assert cfg.get_arg_ignore_keys("other") == set()
+        assert cfg.get_tool_policy("delete_user") is policy
+        assert cfg.get_tool_policy("missing") is None
+        assert cfg.get_tool_max_calls("delete_user") == 2
+        assert cfg.get_tool_max_calls("search_kb") == 5
+
+
+class TestCostModel:
+    def test_token_cost_calculation(self):
+        model = CostModel(input_token_cost_per_1k=0.002, output_token_cost_per_1k=0.010)
+        assert model.token_cost(input_tokens=1500, output_tokens=500) == pytest.approx(0.008)
 
 
 # ─────────────────────────────────────
@@ -652,3 +732,74 @@ class TestDefaultKeyWarning:
             AuraGuard(config=AuraGuardConfig(secret_key=b"my-production-key"))
             key_warnings = [x for x in w if "default development secret_key" in str(x.message)]
             assert len(key_warnings) == 0
+
+
+class TestCacheTTL:
+    def test_cache_valid_expires_entries(self, monkeypatch):
+        cfg = AuraGuardConfig(cache_ttl_seconds=1.0)
+        guard = AuraGuard(config=cfg)
+        state = guard.new_state()
+        key = ("tool_sig", "args_sig")
+        state.result_cache_ts[key] = 10.0
+
+        monkeypatch.setattr("aura_guard.guard._now", lambda: 11.5)
+        assert guard._cache_valid(state, key) is False
+
+
+class TestBudgetWarnings:
+    def test_budget_warning_emitted_once(self):
+        sink = InMemoryTelemetry()
+        cfg = AuraGuardConfig(
+            max_cost_per_run=0.20,
+            cost_model=CostModel(default_tool_call_cost=0.04),
+            cost_warning_threshold=0.8,
+        )
+        guard = AuraGuard(config=cfg, telemetry=Telemetry(sink=sink))
+        state = guard.new_state()
+
+        for i in range(4):
+            call = ToolCall(name="get_order", args={"order_id": f"o{i}"})
+            decision = guard.on_tool_call_request(state=state, call=call)
+            assert decision.action == PolicyAction.ALLOW
+            guard.on_tool_result(state=state, call=call, result=ToolResult(ok=True))
+
+        warnings = sink.find("budget_warning")
+        assert len(warnings) == 1
+
+
+class TestCompositeTelemetry:
+    def test_failing_sink_does_not_block_other_sinks(self):
+        captured = []
+
+        class FailingSink:
+            def emit(self, event):
+                raise RuntimeError("sink failed")
+
+        class CapturingSink:
+            def emit(self, event):
+                captured.append(event)
+
+        telemetry = CompositeTelemetry(sinks=[FailingSink(), CapturingSink()])
+        telemetry.emit({"event": "budget_warning", "tool": "search_kb"})
+
+        assert captured == [{"event": "budget_warning", "tool": "search_kb"}]
+
+
+class TestAgentGuardOrphanResult:
+    def test_record_result_ignores_orphan_calls(self):
+        guard = AgentGuard(max_cost_per_run=1.0)
+
+        guard.record_result(ok=True, payload="orphan")
+        assert guard.tool_calls_executed == 0
+        assert guard.tool_calls_failed == 0
+
+        first = guard.check_tool("refund", args={"order_id": "o1"}, ticket_id="t1")
+        assert first.action == PolicyAction.ALLOW
+        guard.record_result(ok=True, payload="done")
+
+        second = guard.check_tool("refund", args={"order_id": "o2"}, ticket_id="t2")
+        assert second.action == PolicyAction.BLOCK
+        guard.record_result(ok=True, payload="should_not_record")
+
+        assert guard.tool_calls_executed == 1
+        assert guard.tool_calls_failed == 0

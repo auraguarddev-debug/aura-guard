@@ -25,7 +25,7 @@ dependencies = []
 
 [project.optional-dependencies]
 langchain = ["langchain-core>=0.1.0"]
-dev = ["pytest>=7.0", "pytest-asyncio>=0.21"]
+dev = ["pytest>=7.0", "pytest-asyncio>=0.21", "pytest-cov>=5.0"]
 
 [project.scripts]
 aura-guard = "aura_guard.cli:main"
@@ -47,3 +47,4 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "--cov=aura_guard --cov-report=term-missing --cov-fail-under=85"
