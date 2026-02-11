@@ -337,37 +337,22 @@ state = state_from_json(json_str)
 
 ---
 
-## Non-goals & limitations
+## Status & limitations
 
-Aura Guard is **not**:
-- a content moderation system
-- a factuality/accuracy verifier
-- a prompt library that “makes agents smarter”
-- an observability product (it can emit telemetry, but that’s not the focus)
+Aura Guard is v0.3 — the API is stabilizing but may change before v1.0.
 
-It **is**:
-- a deterministic enforcement layer for tool loops, retries, side-effects, and budgets
+**Stable:** The 3-method API (check_tool / record_result / check_output), the 6 PolicyAction values, and AuraGuardConfig.
 
----
+**May change:** Default threshold values, serialization format (versioned — old state will error, not silently corrupt), telemetry event names.
 
-## Security & privacy
+**Limitations:**
+- In-memory state only. Not thread-safe. Create one guard per agent run.
+- Side-effect enforcement is at-most-once within a single process. Not exactly-once across restarts.
+- Argument jitter detection uses token overlap, not semantic similarity. English-biased.
+- Cost estimates are configurable approximations, not actual billing data.
+- Guard state stores HMAC signatures only — no raw args or payloads in state or telemetry.
 
-- Guard state is designed to store **signatures** (HMAC hashes), not raw tool args or payloads.
-- If you persist state or emit telemetry in production, set a unique `secret_key`.
-- Don’t turn on raw-text persistence unless you understand the privacy impact.
-
-### Privacy by design
-
-Aura Guard’s state management uses **HMAC-SHA256 signatures exclusively**. Raw PII — arguments, result payloads, ticket IDs — is **never persisted to disk or emitted in telemetry**. Only keyed hashes are stored.
-
-This means:
-- Guard state can be safely written to Redis, Postgres, or log aggregators without leaking customer data.
-- Telemetry events contain tool names, reason codes, and cost counters — never raw inpt guard.check_output(assistant_text)
-```
-
-The async wrapper calls the same deterministic engine (no I/O, sub-millisecond) — safe to run directly on the event loop.
-
----
+For architecture details, see docs/ARCHITECTURE.md.
 
 ---
 
