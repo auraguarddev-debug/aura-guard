@@ -325,6 +325,30 @@ class TestCostBudget:
         warnings = sink.find("budget_warning")
         assert len(warnings) >= 1
 
+    def test_identical_repeat_cache_hit_bypasses_budget_projection(self):
+        cfg = AuraGuardConfig(
+            max_cost_per_run=0.10,
+            cost_model=CostModel(default_tool_call_cost=0.04),
+        )
+        guard = AuraGuard(config=cfg)
+        state = guard.new_state()
+
+        call = ToolCall(name="get_order", args={"order_id": "o1"})
+
+        # Execute 2 calls = $0.08
+        for _ in range(2):
+            decision = guard.on_tool_call_request(state=state, call=call)
+            assert decision.action == PolicyAction.ALLOW
+            guard.on_tool_result(state=state, call=call, result=ToolResult(ok=True, payload="order_data"))
+
+        assert state.cumulative_cost == pytest.approx(0.08)
+
+        # Third identical call should come from cache, not budget escalation.
+        decision3 = guard.on_tool_call_request(state=state, call=call)
+        assert decision3.action == PolicyAction.CACHE
+        assert decision3.reason == "identical_toolcall_loop_cache"
+        assert state.cumulative_cost == pytest.approx(0.08)
+
 
 # ─────────────────────────────────────
 # AgentGuard middleware

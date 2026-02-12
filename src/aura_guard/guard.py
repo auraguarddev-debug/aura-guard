@@ -454,6 +454,66 @@ class AuraGuard:
             state.tool_stream = state.tool_stream[-self.cfg.tool_loop_window:]
 
         # ──────────────────────────────────────────
+        # Early cache checks (must run before budget)
+        # ──────────────────────────────────────────
+        if is_side_effect:
+            key = (t_sig, tool, args_sig)
+            if key in state.idempotency_ledger:
+                cached = state.idempotency_ledger[key]
+                cached2 = ToolResult(
+                    ok=cached.ok,
+                    payload=cached.payload,
+                    error_code=cached.error_code,
+                    payload_sig=cached.payload_sig,
+                    cached=True,
+                    side_effect_executed=cached.side_effect_executed,
+                )
+                est = self._estimate_tool_cost(tool)
+                self._emit(
+                    "idempotent_replay_blocked",
+                    state=state,
+                    tool=tool,
+                    ticket_sig=t_sig,
+                    args_sig=args_sig,
+                    estimated_cost_avoided=round(est, 4),
+                )
+                return PolicyDecision(
+                    action=PolicyAction.CACHE,
+                    reason="idempotent_replay",
+                    cached_result=cached2,
+                )
+
+        repeats = sum(
+            1 for s in state.tool_stream if s.name == tool and s.args_sig == args_sig
+        )
+        if repeats >= self.cfg.repeat_toolcall_threshold:
+            cache_key = (tool, args_sig)
+            if cache_key in state.result_cache and self._cache_valid(state, cache_key):
+                cached = state.result_cache[cache_key]
+                cached2 = ToolResult(
+                    ok=cached.ok,
+                    payload=cached.payload,
+                    error_code=cached.error_code,
+                    payload_sig=cached.payload_sig,
+                    cached=True,
+                    side_effect_executed=cached.side_effect_executed,
+                )
+                est = self._estimate_tool_cost(tool)
+                self._emit(
+                    "tool_call_cache_hit",
+                    state=state,
+                    tool=tool,
+                    args_sig=args_sig,
+                    repeats=repeats,
+                    estimated_cost_avoided=round(est, 4),
+                )
+                return PolicyDecision(
+                    action=PolicyAction.CACHE,
+                    reason="identical_toolcall_loop_cache",
+                    cached_result=cached2,
+                )
+
+        # ──────────────────────────────────────────
         # Primitive 6: Cost budget enforcement
         # ──────────────────────────────────────────
         if self.cfg.max_cost_per_run is not None:
@@ -544,30 +604,6 @@ class AuraGuard:
                 state.attempted_side_effect_calls.get(tool, 0) + 1
             )
 
-            # Idempotency check
-            key = (t_sig, tool, args_sig)
-            if key in state.idempotency_ledger:
-                cached = state.idempotency_ledger[key]
-                cached2 = ToolResult(
-                    ok=cached.ok, payload=cached.payload,
-                    error_code=cached.error_code,
-                    payload_sig=cached.payload_sig,
-                    cached=True,
-                    side_effect_executed=cached.side_effect_executed,
-                )
-                est = self._estimate_tool_cost(tool)
-                self._emit(
-                    "idempotent_replay_blocked",
-                    state=state,
-                    tool=tool, ticket_sig=t_sig, args_sig=args_sig,
-                    estimated_cost_avoided=round(est, 4),
-                )
-                return PolicyDecision(
-                    action=PolicyAction.CACHE,
-                    reason="idempotent_replay",
-                    cached_result=cached2,
-                )
-
             # Max execution limit
             executed = state.executed_side_effect_calls.get(tool, 0)
             if executed >= self.cfg.side_effect_max_executed_per_run:
@@ -592,34 +628,7 @@ class AuraGuard:
         # ──────────────────────────────────────────
         # Primitive 1: Identical tool-call loop
         # ──────────────────────────────────────────
-        repeats = sum(
-            1 for s in state.tool_stream if s.name == tool and s.args_sig == args_sig
-        )
         if repeats >= self.cfg.repeat_toolcall_threshold:
-            cache_key = (tool, args_sig)
-            if cache_key in state.result_cache and self._cache_valid(state, cache_key):
-                cached = state.result_cache[cache_key]
-                cached2 = ToolResult(
-                    ok=cached.ok, payload=cached.payload,
-                    error_code=cached.error_code,
-                    payload_sig=cached.payload_sig,
-                    cached=True,
-                    side_effect_executed=cached.side_effect_executed,
-                )
-                est = self._estimate_tool_cost(tool)
-                self._emit(
-                    "tool_call_cache_hit",
-                    state=state,
-                    tool=tool, args_sig=args_sig,
-                    repeats=repeats,
-                    estimated_cost_avoided=round(est, 4),
-                )
-                return PolicyDecision(
-                    action=PolicyAction.CACHE,
-                    reason="identical_toolcall_loop_cache",
-                    cached_result=cached2,
-                )
-
             self._emit(
                 "identical_toolcall_loop_block",
                 state=state,
