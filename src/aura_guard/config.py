@@ -182,12 +182,6 @@ class AuraGuardConfig:
     # before turning on enforcement in production.
     shadow_mode: bool = False
 
-    # Telemetry redaction behavior
-    # ----------------------------
-    # If True, Aura Guard will avoid storing any raw text in guard state.
-    # It will still compute token signatures for similarity.
-    redact_text_in_state: bool = True
-
     def __post_init__(self) -> None:
         if self.repeat_toolcall_threshold < 1:
             raise ValueError("repeat_toolcall_threshold must be >= 1")
