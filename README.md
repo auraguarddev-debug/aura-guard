@@ -78,15 +78,17 @@ These simulate common agent failure modes (tool loops, retry storms, duplicate s
 
 Tested with Claude Sonnet 4 (`claude-sonnet-4-20250514`), 5 scenarios × 5 runs per variant, real LLM tool-use calls with rigged tool implementations.
 
-| Scenario | No Guard | With Guard | Saved |
-|----------|----------|------------|-------|
-| A: Jitter Loop | $0.2778 | $0.1447 | 48% |
-| B: Double Refund | $0.1396 | $0.1275 | 9% |
-| C: Error Retry Spiral | $0.1345 | $0.0952 | 29% |
-| D: Smart Reformulation | $0.8093 | $0.1464 | 82% |
-| E: Flagship | $0.3497 | $0.1420 | 59% |
+| Scenario | No Guard | With Guard | Result |
+|----------|----------|------------|--------|
+| A: Jitter Loop | $0.2778 | $0.1446 | 48% saved |
+| B: Double Refund | $0.1397 | $0.1456 | Prevented duplicate refund at +$0.006 overhead |
+| C: Error Retry Spiral | $0.1345 | $0.0953 | 29% saved |
+| D: Smart Reformulation | $0.8607 | $0.1465 | 83% saved |
+| E: Flagship | $0.3494 | $0.1446 | 59% saved |
 
-64 guard interventions across 25 runs. 0 false positives. Task completion maintained or improved in all scenarios.
+> All costs are p50 (median) across 5 runs. Scenario B costs slightly more because the guard adds an intervention turn but prevents the duplicate side-effect (the refund only executes once). In Scenario B guard runs, 2 of 5 completed in fewer turns ($0.10), while 3 of 5 required the extra intervention turn ($0.145).
+
+64 guard interventions across 25 runs. 0 false positives (expected — see caveat below). Task completion maintained or improved in all scenarios.
 
 Full results, per-run data, and screenshots: [docs/LIVE_AB_EXAMPLE.md](docs/LIVE_AB_EXAMPLE.md) | [JSON report](reports/2026-02-09_claude-sonnet-4_ab.json)
 
