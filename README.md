@@ -46,6 +46,9 @@ Python 3.10+ · Zero dependencies · Apache-2.0
 
 ```bash
 pip install aura-guard
+
+# or with uv
+uv pip install aura-guard
 ```
 
 Try the built-in demo: `aura-guard demo`
